@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心-我的会员</title>
+    <link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.css" th:href="@{/bootstrap-4.4.1-dist/css/bootstrap.css}">
+    <style>
+        .imagesAlt{
+            width: auto;
+            height: 700px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        .mydiv_Center{
+            margin: 0 auto;
+        }
+        ::-webkit-scrollbar {
+            width: 14px;
+            height: 14px;
+        }
+
+        ::-webkit-scrollbar-track,
+        ::-webkit-scrollbar-thumb {
+            border-radius: 999px;
+            border: 5px solid transparent;
+        }
+
+        ::-webkit-scrollbar-track {
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2) inset;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            min-height: 20px;
+            background-clip: content-box;
+            box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.2) inset;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+        .myFont{
+            font-family: 幼圆;
+            font-weight: 900;
+            font-size:18px;
+        }
+        /*鼠标悬浮改变li的背景色*/
+        #sideUl li a:hover {
+            background-color: rgba(186,186,186,0.41);
+            display: block;
+            color: black;
+        }
+
+        #sideUl li a{
+            height: 50px;
+            padding-top: 14px;
+        }
+    </style>
+</head>
+<!--
+@author：宋佳敏
+@Note：用户个人中心，页面功能包括：我的信息，我的头像，我的会员
+-->
+<body>
+    <!--导航栏-->
+    <div th:replace="~{commons/index_bar::#topbar}"></div>
+
+    <div class="container" style="padding-top: 100px;">
+        <div class="row no-gutters">
+            <div class="col-md-11 justify-content-center mydiv_Center bg-light rounded border shadow-sm">
+                <div class="row no-gutters">
+                    <!--导入用户中心侧边栏-->
+                    <div th:replace="~{commons/user_bar::#userSide(activeUrl='/user/userInfo_vip.html')}"></div>
+
+                    <div class="col-md-10 bg-white">
+                        <ol class="breadcrumb" style="height:50px;">
+                            <li class="breadcrumb-item active" aria-current="page">我的会员</li>
+                        </ol>
+                        <div class="row ml-3">
+                            <img class="rounded-circle border" style="" src="images/header.jpg" th:src="@{${session.userHeaderImage}}" width="64px" height="64px">
+                            <div class="col-md-6">
+                                <div class="row col-md-12">
+                                    <h5 class="pl-3 font-weight-bold">[[${session.userName}]]</h5>
+                                    <span class="badge badge-secondary pt-1 mt-1 ml-3" style="height: 20px;" th:if="${session.userVip==0}">非会员</span>
+                                    <span class="badge badge-danger rounded-pill pt-1 mt-1 ml-2 font-italic" style="height: 20px;font-family: 'Cambria Math'" th:if="${session.userVip==1}">VIP</span>
+                                    <span class="badge badge-warning rounded-pill pt-1 mt-1 ml-2 font-italic" style="height: 20px;font-family:'Cambria Math';color: red;background-color:#FFD700;" th:if="${session.userVip==2}">SVIP</span>
+                                    <img class="rounded-circle border mt-1 ml-1" style="" src="images/logo32x32.ico" th:src="@{/images/logo32x32.ico}" width="22px" height="22px">
+                                </div>
+                                <div class="col-md-12 pt-3 pb-4">
+                                    <h6 style="font-family: 幼圆">升级会员福利多多</h6>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#vipModel">开通会员</button>
+                            </div>
+                        </div>
+                        <hr class="mt-3">
+
+                        <!--轮播框-->
+                        <div id="carouselExampleIndicators" class="carousel slide ml-3 mr-3" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <a href="#"><img src="images/vip-1.png" th:src="@{/images/vip-1.png}" class="d-block w-100" alt="..."></a>
+                                </div>
+                                <div class="carousel-item">
+                                    <a href="#"><img src="images/vip-2.png" th:src="@{/images/vip-2.png}" class="d-block w-100" alt="..."></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--============================大会员特权==============================-->
+                        <div class="pl-3 pt-3">
+
+                            <h4 style="color: #FF3399">大会员特权</h4>
+                            <div class="row justify-content-center">
+                                <div class="col-md-4">
+                                    <h5 style="color: #FF3399">更优质的摄影服务</h5>
+                                    <h6>多对一摄影师，定向服务</h6>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 style="color: #FF3399">图片免费精修</h5>
+                                    <h6>让你的照片，更绚丽</h6>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center pt-4">
+                                <div class="col-md-4">
+                                    <h5 style="color: #FF3399">会员铭牌</h5>
+                                    <h6>如影随形，彰显尊贵身份</h6>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 style="color: #FF3399">更大的优惠折扣</h5>
+                                    <h6>让你的钱，更值钱</h6>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center pt-4">
+                                <div class="col-md-4">
+                                    <h5 style="color: #FF3399">过滤广告</h5>
+                                    <h6>告别烦人广告，给你尊贵体验</h6>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 style="color: #FF3399">专属客服小姐姐</h5>
+                                    <h6>帮你迅速解决遇到的一切问题</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--==========================================================模态框============================================================-->
+    <div class="modal fade" id="vipModel" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="vipModelTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="height: 690px;">
+                <div class="modal-header">
+                    <img class="rounded-circle border ml-1" style="" src="images/header.jpg" th:src="@{/images/header.jpg}" width="36px" height="36px">
+                    <h5 class="modal-title pl-2" id="vipModelTitle">STR少寒</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row col-md-12 justify-content-center mydiv_Center">
+                        <ul class="nav nav-pills mb-3" id="vip-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="vip" name="vip" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">大会员套餐</a>
+                            </li>
+                            <li class="nav-item pl-4">
+                                <a class="nav-link" id="svip" name="svip" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">超级会员套餐</a>
+                            </li>
+                            <li class="nav-item pl-4">
+                                <a class="nav-link disabled" id="other" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">其他开通方式</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active mydiv_Center" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <h7>全平台通用</h7>
+                            <div class="row col-md-12 no-gutters justify-content-center mydiv_Center">
+                                <ul class="nav nav-pills mb-3 pt-3" id="select-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active btn btn-outline-info" style="height: 70px;width: 135px;" id="select1" data-toggle="pill" href="#select1-home" role="tab" aria-controls="pills-home" aria-selected="true">
+                                            <span style="font-size: large;">¥148/年</span><span class="pl-1" style="text-decoration:line-through;font-size: small;color: grey">¥233</span><br>
+                                            <span class="pt-1">年度大会员</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item pl-2">
+                                        <a class="nav-link btn btn-outline-info" style="height: 70px;width: 135px;" id="select2" data-toggle="pill" href="#select2-home" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                            <span style="font-size: large;">¥45/季</span><span class="pl-1" style="text-decoration:line-through;font-size: small;color: grey">¥68</span><br>
+                                            <span class="pt-1">季度大会员</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item pl-2">
+                                        <a class="nav-link btn btn-outline-info" style="height: 70px;width: 135px;" id="select3" data-toggle="pill" href="#select3-home" role="tab" aria-controls="pills-contact" aria-selected="false">
+                                            <span style="font-size: large;">¥15/季</span><span class="pl-1" style="text-decoration:line-through;font-size: small;color: grey">¥25</span><br>
+                                            <span class="pt-1">月度大会员</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content" id="select-tabContent" style="font-size: small">
+                                <div class="tab-pane fade show active" id="select1-home" role="tabpanel" aria-labelledby="pills-home-tab">每次续期366天，到期自动续费，可随时取消</div>
+                                <div class="tab-pane fade" id="select2-home" role="tabpanel" aria-labelledby="pills-profile-tab">每次续期93天，到期自动续费，可随时取消</div>
+                                <div class="tab-pane fade" id="select3-home" role="tabpanel" aria-labelledby="pills-contact-tab">每次续期31天，到期自动续费，可随时取消</div>
+                            </div>
+                            <div class="form-check form-check-inline pt-3">
+                                <input class="form-check-input" type="checkbox" id="Checkbox" checked value="option2">
+                                <label class="form-check-label" for="Checkbox" style="font-size: small">到期自动续费，可随时取消</label>
+                            </div>
+
+                            <div class="row form-group col-md-11 pt-3">
+                                <label for="inputState" class="col-md-4 col-form-label" style="font-size: medium;float: right">选择代金卷：</label>
+                                <select id="inputState" class="form-control col-md-8" style="height: 35px;" disabled>
+                                    <option selected>无可用优惠卷</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+
+                            <div class="row border rounded ml-2 mr-2" style="height:150px;">
+                                <div class="row col-4">
+                                    <div class="nav bg-light flex-column nav-pills" style="font-size: x-small;text-align: center" id="post" role="tablist" aria-orientation="vertical">
+                                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">扫码支付</a>
+                                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">其他支付方式</a>
+                                    </div>
+                                </div>
+                                <div class="row col-8">
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="images/post.png" th:src="@{/images/post.png}" style="height:110px; width:110px;" class="border ml-4 mt-3 mb-5">
+                                                </div>
+                                                <div class="col-md-6 mt-5">
+                                                    <span th:class="pl-1" style="font-size:x-large;color:#007bff" id="money">¥148</span><span id="savemoney" class="pl-3" style="font-size: small;color: grey">已省¥85</span>
+                                                    <span style="font-size: small;">请使用微信扫码支付</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">正在努力研发...</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pl-2">
+                                <span style="font-size: small;color:gainsboro;">商品展示的划横线价格为参考价，是该商品曾经出现过的销售价，并非原价</span>
+                            </div>
+
+                            <div class="pl-2 pt-3" style="font-size: small;text-align: center">
+                                <a href="#" class="text-decoration-none" style="color:grey">《大会员用户协议》</a>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <h7>全平台通用</h7>
+                            <div class="row col-md-12 no-gutters justify-content-center mydiv_Center">
+                                <ul class="nav nav-pills mb-3 pt-3" id="select-tab2" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active btn btn-outline-info" style="height: 70px;width: 135px;" id="select2-1" data-toggle="pill" href="#select1-home2" role="tab" aria-controls="pills-home" aria-selected="true">
+                                            <span style="font-size: large;">¥188/年</span><span class="pl-1" style="text-decoration:line-through;font-size: small;color: grey">¥388</span><br>
+                                            <span class="pt-1">年度超级会员</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item pl-2">
+                                        <a class="nav-link btn btn-outline-info" style="height: 70px;width: 135px;" id="select2-2" data-toggle="pill" href="#select2-home2" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                            <span style="font-size: large;">¥98/季</span><span class="pl-1" style="text-decoration:line-through;font-size: small;color: grey">¥115</span><br>
+                                            <span class="pt-1">季度超级会员</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item pl-2">
+                                        <a class="nav-link btn btn-outline-info" style="height: 70px;width: 135px;" id="select2-3" data-toggle="pill" href="#select3-home2" role="tab" aria-controls="pills-contact" aria-selected="false">
+                                            <span style="font-size: large;">¥35/季</span><span class="pl-1" style="text-decoration:line-through;font-size: small;color: grey">¥45</span><br>
+                                            <span class="pt-1">月度超级会员</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content" id="select-tabContent2" style="font-size: small">
+                                <div class="tab-pane fade show active" id="select1-home2" role="tabpanel" aria-labelledby="pills-home-tab">372天，天天好福利</div>
+                                <div class="tab-pane fade" id="select2-home2" role="tabpanel" aria-labelledby="pills-profile-tab">93天超级会员</div>
+                                <div class="tab-pane fade" id="select3-home2" role="tabpanel" aria-labelledby="pills-contact-tab">31天超级会员</div>
+                            </div>
+                            <div class="form-check form-check-inline pt-3">
+                                <input class="form-check-input" type="checkbox" id="Checkbox2" checked value="option2">
+                                <label class="form-check-label" for="Checkbox" style="font-size: small">到期自动续费，可随时取消</label>
+                            </div>
+
+                            <div class="row form-group col-md-11 pt-3">
+                                <label for="inputState2" class="col-md-4 col-form-label" style="font-size: medium;float: right">选择代金卷：</label>
+                                <select id="inputState2" class="form-control col-md-8" style="height: 35px;" disabled>
+                                    <option selected>无可用优惠卷</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+
+                            <div class="row border rounded ml-2 mr-2" style="height:150px;">
+                                <div class="row col-4">
+                                    <div class="nav bg-light flex-column nav-pills" style="font-size: x-small;text-align: center" id="post2" role="tablist" aria-orientation="vertical">
+                                        <a class="nav-link active" id="v-pills-home-tab2" data-toggle="pill" href="#v-pills-home2" role="tab" aria-controls="v-pills-home" aria-selected="true">扫码支付</a>
+                                        <a class="nav-link" id="v-pills-profile-tab2" data-toggle="pill" href="#v-pills-profile2" role="tab" aria-controls="v-pills-profile" aria-selected="false">其他支付方式</a>
+                                    </div>
+                                </div>
+                                <div class="row col-8">
+                                    <div class="tab-content" id="v-pills-tabContent2">
+                                        <div class="tab-pane fade show active" id="v-pills-home2" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="images/post.png" th:src="@{/images/post.png}" height="110px;" width="110px;" class="border ml-4 mt-3 mb-5">
+                                                </div>
+                                                <div class="col-md-6 mt-5">
+                                                    <span class="pl-1" style="font-size:x-large;color:#007bff" id="money2">¥188</span><span id="savemoney2" class="pl-2" style="font-size: small;color: grey">已省¥200</span>
+                                                    <span style="font-size: small;">请使用微信扫码支付</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="v-pills-profile2" role="tabpanel" aria-labelledby="v-pills-profile-tab">正在努力研发...</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pl-2">
+                                <span style="font-size: small;color:gainsboro;">商品展示的划横线价格为参考价，是该商品曾经出现过的销售价，并非原价</span>
+                            </div>
+
+                            <div class="pl-2 pt-3" style="font-size: small;text-align: center">
+                                <a href="#" class="text-decoration-none" style="color:grey">《超级会员用户协议》</a>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <h1>活动正在积极筹备中...</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <form onclick="">
+                        <input type="hidden" id="vipmark" name="vipmark" value="vip">
+                        <button type="submit" class="btn btn-primary">开通</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="js/jquery-3.2.1/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
+    <script src="bootstrap-4.4.1-dist/js/bootstrap.min.js" th:src="@{/bootstrap-4.4.1-dist/js/bootstrap.min.js}"></script>
+    <script src="bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js" th:src="@{/bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js}"></script>
+    <script>
+        //设置轮播时间
+        $('.carousel').carousel({
+            interval: 3000
+        })
+        //初始化弹窗
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        });
+        //鼠标悬停显示下拉框
+        $("#dropdownMenu1").hover(
+            function(){
+                $("#dropDownCur").show();
+            },function(){
+                $("#dropDownCur").hide();
+            });
+
+        //为了鼠标可以进入下拉框
+        $("#dropDownCur").hover(function() {
+            $(this).show();//鼠标进入下拉框
+        }, function() {
+            $(this).hide();//鼠标离开下拉框后，就会消失
+        });
+
+        //下拉菜单文字切换
+        function shows(a) {
+            $('#dropdownMenu1').text(a);
+        };
+
+        $(function () {
+            document.getElementById("vip").onclick=function () { $("#vipmark").val('vip') }
+            document.getElementById("svip").onclick=function () { $("#vipmark").val('svip')}
+            document.getElementById("select1").onclick=function () { document.getElementById("money").innerHTML="¥148"; document.getElementById("savemoney").innerHTML="已省¥85"}
+            document.getElementById("select2").onclick=function () { document.getElementById("money").innerHTML="¥45";document.getElementById("savemoney").innerHTML="已省¥23" }
+            document.getElementById("select3").onclick=function () { document.getElementById("money").innerHTML="¥15";document.getElementById("savemoney").innerHTML="已省¥10"}
+            document.getElementById("select2-1").onclick=function () { document.getElementById("money2").innerHTML="¥188"; document.getElementById("savemoney2").innerHTML="已省¥200"}
+            document.getElementById("select2-2").onclick=function () { document.getElementById("money2").innerHTML="¥98";document.getElementById("savemoney2").innerHTML="已省¥17&nbsp;&nbsp;" }
+            document.getElementById("select2-3").onclick=function () { document.getElementById("money2").innerHTML="¥35";document.getElementById("savemoney2").innerHTML="已省¥10&nbsp;&nbsp;"}
+        })
+    </script>
+</body>
+</html>

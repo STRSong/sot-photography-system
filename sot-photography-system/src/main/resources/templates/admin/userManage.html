@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员页面</title>
+    <link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.css}">
+    <!--
+    @author:宋佳敏
+    @time: 2020-3-6
+    -->
+
+    <style>
+        html,body{
+            height: 100%;
+        }
+
+
+        /*滑动条样式*/
+        ::-webkit-scrollbar {
+            width: 14px;
+            height: 14px;
+        }
+
+        ::-webkit-scrollbar-track,
+        ::-webkit-scrollbar-thumb {
+            border-radius: 999px;
+            border: 5px solid transparent;
+        }
+
+        ::-webkit-scrollbar-track {
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2) inset;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            min-height: 20px;
+            background-clip: content-box;
+            box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.2) inset;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+        /*滑动条==================================*/
+
+        /*鼠标悬浮改变li的背景色*/
+         #sidebar li a:hover {
+             background-color:#007bff;
+             display: block;
+             color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!--删除表单，隐藏域-->
+    <form th:id="deleteEmpForm" th:method="post">
+        <input type="hidden" name="_method" th:value="delete">
+    </form>
+    <!--导航栏-->
+    <div th:replace="~{commons/admin_bar::topbar}"></div>
+
+    <div class="row d-flex" style="width: 100%;">
+        <!--侧边栏，aside定义内容之外的内容-->
+        <div th:replace="~{commons/admin_bar::#sidebar(activeUrl='admin.html')}"></div>
+
+        <div class="flex-row-reverseg flex-grow-1  ml-4 mr-2 pt-2 align-self-start" id="main" style="overflow:auto;height:93vh;">
+            <div class="d-flex">
+                   <span class="pt-2 pb-3"><a role="button" href="#" class="btn btn-success font-weight-bold" data-toggle="modal" data-target="#addModal">用户添加</a>
+                   </span>
+                    <form class="form-inline my-2 pt-2 pb-3 pl-3 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">查询</button>
+                    </form>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">用户id</th>
+                    <th scope="col">用户名</th>
+                    <th scope="col">密码</th>
+                    <th scope="col">邮箱</th>
+                    <th scope="col">电话号码</th>
+                    <th scope="col">权限</th>
+                    <th scope="col">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${users}">
+                    <td th:text="${user.userId}"></td>
+                    <td th:text="${user.userName}"></td>
+                    <td th:text="${user.userPassword}"></td>
+                    <td th:text="${user.userEmail}"></td>
+                    <td th:text="${user.userTel}"></td>
+                    <td th:text="${user.role}"></td>
+                    <td class="float-right">
+                        <a class="btn btn-info btn-md font-weight-bold text-white" th:href="@{/userEdit/}+${user.userId}">编辑
+                            <svg class="bi bi-pencil" width="22" height="22" viewBox="2 2 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M13.293 3.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM14 4l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/>
+                                <path fill-rule="evenodd" d="M14.146 8.354l-2.5-2.5.708-.708 2.5 2.5-.708.708zM5 12v.5a.5.5 0 00.5.5H6v.5a.5.5 0 00.5.5H7v.5a.5.5 0 00.5.5H8v-1.5a.5.5 0 00-.5-.5H7v-.5a.5.5 0 00-.5-.5H5z" clip-rule="evenodd"/>
+                            </svg>
+                        </a>
+                        <button class="btn btn-danger btn-md font-weight-bold text-white deleteBtn" th:attr="url=@{/userDelete/}+${user.userId}">删除
+                            <svg class="bi bi-trash" width="22" height="22" viewBox="2 2 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.5 7.5A.5.5 0 018 8v6a.5.5 0 01-1 0V8a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V8a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V8z"/>
+                                <path fill-rule="evenodd" d="M16.5 5a1 1 0 01-1 1H15v9a2 2 0 01-2 2H7a2 2 0 01-2-2V6h-.5a1 1 0 01-1-1V4a1 1 0 011-1H8a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM6.118 6L6 6.059V15a1 1 0 001 1h6a1 1 0 001-1V6.059L13.882 6H6.118zM4.5 5V4h11v1h-11z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            [(${page})]
+        </div>
+    </div>
+
+    <!--==============================================模态框=======================================-->
+    <!--用户添加模态框-->
+    <div class="modal fade" id="addModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form th:action="@{/userAdd}" class="was-validated" method="post" id="form1">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="staticBackdropLabel">用户添加</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mb-5">
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-light"><img src="images/icons/person-fill.svg" th:src="@{/images/icons/person-fill.svg}" height="24px" width="24px"></div>
+                                <input  class="form-control is-invalid" id="userName"  name="userName" required="" pattern="[\u4e00-\u9fa5a-zA-Z0-9]{2,8}" placeholder="请输入不含特殊字符2-8位的用户名...">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-light"><img src="images/icons/lock-fill.svg" th:src="@{/images/icons/lock-fill.svg}" height="24px" width="24px"></div>
+                                <input type="text" class="form-control" id="userPassword" required="" name="userPassword" pattern="[a-zA-Z0-9]{4,10}" placeholder="请输入不含特殊字符4-10位的密码...">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-light"><img src="images/icons/envelope-fill.svg" th:src="@{/images/icons/envelope-fill.svg}" height="24px" width="24px"></div>
+                                <input type="email" class="form-control" id="userEmail" name="userEmail" required="" pattern="^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$" placeholder="请输入邮箱号码...">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group">
+                                <div class="input-group-text bg-light"><img src="images/icons/phone.svg" th:src="@{/images/icons/phone.svg}" height="24px" width="24px"></div>
+                                <input type="tel" class="form-control" id="userTel" name="userTel" required="required" placeholder="请输入11位电话号码..." pattern="1[34578]\d{9}$">
+                            </div>
+                        </div>
+                        <div class="form-group row col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group-text bg-light" style="width: 48px;"><img src="images/icons/phone.svg" th:src="@{/images/icons/phone.svg}" height="24px" width="24px"></div>
+                            <select class="custom-select w-75" required style="width:200px;" name="role">
+                                <option value="">请选择用户角色</option>
+                                <option value="1">普通用户</option>
+                                <option value="2">摄影师</option>
+                                <option value="3">管理员</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-5">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary">添加</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--==========================================修改==========================================-->
+
+    <!--用户修改模态框-->
+    <div class="modal fade" id="editModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form th:action="@{/userEditSave}" class="was-validated" method="post" id="form2">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">用户修改</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="userId" th:value="${session.editUser!=null}?${session.editUser.userId}">
+                    <div class="modal-body mb-5">
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-light"><img src="images/icons/person-fill.svg" th:src="@{/images/icons/person-fill.svg}" height="24px" width="24px"></div>
+                                <input  class="form-control is-invalid"  name="userName" th:value="${session.editUser!=null}?${session.editUser.userName}" required="" pattern="[\u4e00-\u9fa5a-zA-Z0-9]{2,8}" placeholder="请输入不含特殊字符2-8位的用户名...">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-light"><img src="images/icons/lock-fill.svg" th:src="@{/images/icons/lock-fill.svg}" height="24px" width="24px"></div>
+                                <input type="text" class="form-control" required="" name="userPassword" th:value="${session.editUser!=null}?${session.editUser.userPassword}" pattern="[a-zA-Z0-9]{4,10}" placeholder="请输入不含特殊字符4-10位的密码...">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-light"><img src="images/icons/envelope-fill.svg" th:src="@{/images/icons/envelope-fill.svg}" height="24px" width="24px"></div>
+                                <input type="email" class="form-control" name="userEmail" th:value="${session.editUser!=null}?${session.editUser.userEmail}" required="" pattern="^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$" placeholder="请输入邮箱号码...">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group">
+                                <div class="input-group-text bg-light"><img src="images/icons/phone.svg" th:src="@{/images/icons/phone.svg}" height="24px" width="24px"></div>
+                                <input type="tel" class="form-control" name="userTel" th:value="${session.editUser!=null}?${session.editUser.userTel}" required="required" placeholder="请输入11位电话号码..." pattern="1[34578]\d{9}$">
+                            </div>
+                        </div>
+                        <div class="form-group row col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group-text bg-light" style="width: 48px;"><img src="images/icons/phone.svg" th:src="@{/images/icons/phone.svg}" height="24px" width="24px"></div>
+                            <select class="custom-select w-75" required style="width:200px;" name="role">
+                                <option value="">请选择用户角色</option>
+                                <option value="1" th:selected="${session.editUser!=null}?${session.editUser.role==1}">普通用户</option>
+                                <option value="2" th:selected="${session.editUser!=null}?${session.editUser.role==2}">摄影师</option>
+                                <option value="3" th:selected="${session.editUser!=null}?${session.editUser.role==3}">管理员</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-5">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--错误提示-->
+    <button type="button" class="hidden" style="display: none" data-toggle="modal" id="errorbt" data-target="#errorModal"></button>
+    <div class="modal fade" data-toggle="modal" id="errorModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>错误提示</h4>
+                </div>
+                <div class="modal-body">
+                    <h5 style="color: red">[[${msg}]]</h5>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" data-toggle="modal" id="errorModal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>提示</h4>
+                </div>
+                <div class="modal-body">
+                    <h5 style="color: red">确定删除该用户吗？</h5>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" data-dismiss="modal">关闭</button>
+                    <button class="btn btn-primary" id="sub"  data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--提示-->
+    <button type="button" class="hidden" style="display: none" data-toggle="modal" id="successbt" data-target="#successModal"></button>
+    <div class="modal fade" data-toggle="modal" id="successModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>提示</h4>
+                </div>
+                <div class="modal-body">
+                    <!--<div style="color: red" id="modelText"></div>-->
+                    <h5 style="color: red" th:if="${session.mark=='deleteSuccess'}">删除成功</h5>
+                    <h5 style="color: red" th:if="${session.mark=='addSuccess'}">添加成功</h5>
+                    <h5 style="color: red" th:if="${session.mark=='editSuccess'}">编辑成功</h5>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-info" data-dismiss="modal">关闭</a>
+                    <!--<a class="btn btn-info" th:href="@{/markClear}">关闭</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--引入js文件-->
+    <script src="js/jquery-3.2.1/jquery-3.2.1.min.js" th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+    <script src="bootstrap-4.4.1-dist/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+    <script src="bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $("#mobile-nav-taggle").click(function () {
+            var mobileMenu = $("#side_Bar");
+            if (mobileMenu.hasClass("show")) {
+                setTimeout(function () {
+                    mobileMenu.removeClass("show");
+                }, 100)
+            }else {
+                setTimeout(function (){
+                    mobileMenu.addClass("show");
+                }, 100)
+            }
+        });
+
+        $(function () {
+            var msg="[[${msg}]]";
+            if(msg != ''){
+                document.getElementById("errorbt").click();
+                msg = null;
+            }
+        })
+
+        $(".deleteBtn").click(function () {
+            $("#errorModal2").modal('show');
+            var url=$(this).attr("url");
+            //模态框点击确定是提交所需要的表单，设置提交地址，获取按钮属性值
+            $("#sub").click(function () {
+                $("#deleteEmpForm").attr("action",url).submit();
+            })
+           // $("#deleteEmpForm").attr("action",$(this).attr("url")).submit();
+            return false;
+        });
+
+        //用户编辑
+        $(function () {
+            var userId = "[[${session.click}]]";
+            if(userId!=''){
+                $("#editModal").modal('show');
+            }else {
+                $("#editModal").modal('hide');
+            }
+        })
+
+        //JS获取url参数
+        function getQueryVariable(variable)
+        {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                if(pair[0] == variable){return pair[1];}
+            }
+            return(false);
+        }
+
+        $(function () {
+            var mark="[[${session.mark}]]";
+            if(mark!=''){
+                document.getElementById("successbt").click();
+                //document.getElementById('modelText').innerHTML = "删除成功！";
+
+            }
+        })
+
+        //清除标记，待定
+        function clearMark() {
+            sessionStorage.setItem("flg",'');
+            $("#successModal").modal('hide');
+        }
+
+
+    </script>
+</body>
+</html>

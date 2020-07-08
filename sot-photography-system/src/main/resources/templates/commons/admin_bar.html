@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>导航条</title>
+</head>
+<body>
+<!--导航栏-->
+<div style="height: 7%" th:fragment="topbar" th:id="topbar">
+    <nav class="navbar  navbar-light bg-light border-bottom fixed-top" style="height: 7%">
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" id="mobile-nav-taggle"  data-placement="right">
+            <span class="navbar-toggler-icon" style="color:black;"></span>
+        </button>
+        <a class="font-weight-bold text-success nav-link" style="font-size: x-large;" href="admin.html"><b>旧时光<span class="text-primary">网</span></b></a>
+        <div class="mr-auto">
+            <ul class="nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        </div>
+        <a class="btn btn-danger font-weight-bold ml-auto" role="button" href="#" th:href="@{/loginout}">注销
+            <svg class="bi bi-power" width="24" height="24" viewBox="2 2 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M7.578 6.437a5 5 0 104.922.044l.5-.865a6 6 0 11-5.908-.053l.486.874z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M9.5 10V3h1v7h-1z" clip-rule="evenodd"/>
+            </svg>
+        </a>
+    </nav>
+</div>
+
+<!--侧边栏，aside定义内容之外的内容-->
+<aside id="sidebar" class="bg-light" style="overflow:auto;">
+    <div class="bg-light show collapse pt-4 ml-3 rounded" id="side_Bar" data-placement="right" style="text-align: center;color: black;.a{color: black;};width: 250px;">
+        <div class="border-bottom">
+            <img src="images/header.jpg" th:src="@{${session.userHeaderImage}}" class="rounded-circle border border-dark mt-2" width="78px" height="78px">
+            <h5 class="pt-2 pb-4">管理员:<span style="color: red">[[${session.userName}]]</span></h5>
+        </div>
+        <div>
+            <ul class="nav flex-column font-weight-normal nav-pills" id="sideUl" style="font-family: 微软雅黑">
+                <li class="nav-item border-bottom">
+                    <a class="nav-link" href="admin.html" th:href="@{/admin.html}" th:class="${activeUrl=='admin.html'?'nav-link active':'nav-link'}">
+                        <img src="images/icons/people.svg" width="22" height="22"style="vertical-align :bottom">用户管理
+                    </a>
+                </li>
+                <li class="nav-item border-bottom">
+                    <a class="nav-link" href="test.html">Link</a>
+                </li>
+                <li class="nav-item border-bottom">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Disabled</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>
+
+
+
+
+</body>
+</html>

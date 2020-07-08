@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心-我的头像</title>
+    <link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.css" th:href="@{/bootstrap-4.4.1-dist/css/bootstrap.css}">
+    <link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.min.css" th:href="@{/bootstrap-4.4.1-dist/css/bootstrap.min.css}">
+    <!--引入fileinput的css-->
+    <link rel="stylesheet" href="bootstrap-fileinput-5.0.8/css/fileinput.css" th:href="@{/bootstrap-fileinput-5.0.8/css/fileinput.css}">
+    <link href="bootstrap-fileinput-5.0.8/themes/explorer-fas/theme.css" th:href="@{/bootstrap-fileinput-5.0.8/themes/explorer-fas/theme.css}" media="all" rel="stylesheet" type="text/css"/>
+    <!--引入fileinput依赖的在线图标库 font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+
+    <style>
+        .imagesAlt{
+            width: auto;
+            height: 700px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        .mydiv_Center{
+            margin: 0 auto;
+        }
+        ::-webkit-scrollbar {
+            width: 14px;
+            height: 14px;
+        }
+
+        ::-webkit-scrollbar-track,
+        ::-webkit-scrollbar-thumb {
+            border-radius: 999px;
+            border: 5px solid transparent;
+        }
+
+        ::-webkit-scrollbar-track {
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2) inset;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            min-height: 20px;
+            background-clip: content-box;
+            box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.2) inset;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+        .myFont{
+            font-family: 幼圆;
+            font-weight: 900;
+            font-size:18px;
+        }
+        /*鼠标悬浮改变li的背景色*/
+        #sideUl li a:hover {
+            background-color: rgba(186,186,186,0.41);
+            display: block;
+            color: black;
+        }
+
+        #sideUl li a{
+            height: 50px;
+            padding-top: 14px;
+        }
+    </style>
+
+</head>
+<!--
+@author：宋佳敏
+@Note：用户个人中心，页面功能包括：我的信息，我的头像，我的会员
+-->
+<body>
+    <!--导航栏-->
+    <div th:replace="~{commons/index_bar::#topbar}"></div>
+
+    <div class="container" style="padding-top: 100px;">
+        <div class="row no-gutters">
+            <div class="col-md-11 justify-content-center mydiv_Center bg-light rounded border shadow-sm">
+                <div class="row no-gutters">
+                    <!--导入用户中心侧边栏-->
+                    <div th:replace="~{commons/user_bar::#userSide(activeUrl='/user/userInfo_head.html')}"></div>
+
+                    <div class="col-md-10 bg-white">
+                        <ol class="breadcrumb" style="height:50px;">
+                            <li class="breadcrumb-item active" aria-current="page">我的头像</li>
+                        </ol>
+                        <div class="row col-md-2 justify-content-center mydiv_Center rounded-pill border border-danger" style="height:145px;">
+                            <img class="rounded-circle border border-warning mt-3" style="box-shadow: 0 0 40px 6px lightpink;" src="images/header.jpg" th:src="@{${session.userHeaderImage}}" width="110px" height="110px">
+                        </div>
+                        <div class="row col-md-3 pt-4 pb-4 justify-content-center mydiv_Center">
+                            <button type="button" class="btn btn-outline-success float-right" data-toggle="modal" data-target="#headModel">更换头像</button>
+                        </div>
+                        <hr>
+                        <div class="ml-3">
+                            <div class="row pl-4"><h4 style="color: #FF6699">热门头像</h4></div>
+                            <div class="row pt-3 pl-2">
+                                <div class="col-md-3"><a href="#"><img src="images/logo32x32.ico" th:src="@{/images/logo32x32.ico}" class="rounded-pill border shadow mt-4" width="110px" height="110px"></a></div>
+                                <div class="col-md-3"><a href="#"><img src="images/壁纸.jpg" th:src="@{/images/壁纸.jpg}" class="rounded-pill border shadow mt-4" width="110px" height="110px"></a></div>
+                                <div class="col-md-3"><a href="#"><img src="images/壁纸4.jpg" th:src="@{/images/壁纸4.jpg}" class="rounded-pill border shadow mt-4" width="110px" height="110px"></a></div>
+                                <div class="col-md-3"><a href="#"><img src="images/壁纸5.jpg" th:src="@{/images/壁纸5.jpg}" class="rounded-pill border shadow mt-4" width="110px" height="110px"></a></div>
+                                <div class="col-md-3"><a href="#"><img src="images/壁纸7.jpg" th:src="@{/images/壁纸7.jpg}" class="rounded-pill border shadow mt-4" width="110px" height="110px"></a></div>
+                                <div class="col-md-3"><a href="#"><img src="images/壁纸8.jpg" th:src="@{/images/壁纸8.jpg}" class="rounded-pill border shadow mt-4" width="110px" height="110px"></a></div>
+                                <div class="col-md-3"><a href="#"><img src="images/壁纸7.jpg" th:src="@{/images/壁纸7.jpg}" class="rounded-pill border shadow mt-4" width="110px" height="110px"></a></div>
+                                <div class="col-md-3"><a href="#"><img src="images/壁纸8.jpg" th:src="@{/images/壁纸8.jpg}" class="rounded-pill border shadow mt-4" width="110px" height="110px"></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--=============================================================提示模态框===================================================-->
+    <div class="modal fade" data-toggle="modal" id="infoModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>提示</h4>
+                </div>
+                <div class="modal-body">
+                    <h5 style="color: red" id="context"></h5>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--=============================================================================================================================-->
+    <!-- Modal -->
+    <div class="modal fade" id="headModel" tabindex="-1" role="dialog" aria-labelledby="headModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="headModalCenterTitle">更换头像</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form enctype="multipart/form-data" th:method="post" th:action="@{/upImage}">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 border-right" style="height:400px;">
+                                <img class="rounded-pill border mt-5" style="margin-left: 35%;" height="150px" width="150px" src="images/header.jpg" th:src="@{${session.userHeaderImage}}">
+                                <span style="text-align: center" class="pt-3"><h5 style="padding-left: 40px;">当前头像</h5></span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-11">
+                                    <div class="form-group" style="height:400px;">
+                                        <div class="file-loading">
+                                            <input id="userHeaderImage" name="userHeaderImage" type="file" multiple>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row col-md-6 justify-content-center mydiv_Center">
+                            <!--<button style="width: 100px;" type="submit" class="btn btn-primary">更新</button>-->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="js/jquery-3.2.1/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
+    <script src="bootstrap-4.4.1-dist/js/bootstrap.min.js" th:src="@{/bootstrap-4.4.1-dist/js/bootstrap.min.js}"></script>
+    <script src="bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js" th:src="@{/bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js}"></script>
+    <!--引入文件fileinput的js-->
+    <script src="bootstrap-fileinput-5.0.8/js/fileinput.js" th:src="@{/bootstrap-fileinput-5.0.8/js/fileinput.js}"></script>
+    <script src="bootstrap-fileinput-5.0.8/themes/fas/theme.js" th:src="@{/bootstrap-fileinput-5.0.8/themes/fas/theme.js}"></script>
+    <script src="bootstrap-fileinput-5.0.8/themes/explorer-fas/theme.js" th:src="@{/bootstrap-fileinput-5.0.8/themes/explorer-fas/theme.js}"></script>
+    <script src="bootstrap-fileinput-5.0.8/js/locales/zh.js" th:src="@{/bootstrap-fileinput-5.0.8/js/locales/zh.js}"></script>
+    <script>
+        //初始化弹窗
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        });
+        //鼠标悬停显示下拉框
+        $("#dropdownMenu1").hover(
+            function(){
+                $("#dropDownCur").show();
+            },function(){
+                $("#dropDownCur").hide();
+            });
+
+        //为了鼠标可以进入下拉框
+        $("#dropDownCur").hover(function() {
+            $(this).show();//鼠标进入下拉框
+        }, function() {
+            $(this).hide();//鼠标离开下拉框后，就会消失
+        });
+
+        //下拉菜单文字切换
+        function shows(a) {
+            $('#dropdownMenu1').text(a);
+        };
+
+        //上传头像
+        $("#userHeaderImage").fileinput({
+            theme: 'fas',
+            language: 'zh',
+            uploadUrl: '[[@{/upImage}]]',
+            uploadAsync: true, //默认异步上传
+            dropZoneTitle: '拖拽图片到这里...</br>请选择小于3M的图片',
+            maxFileCount: 1,//最多文件数量
+            maxFileSize: 3072,//文件最大限制
+            dropZoneEnabled: true,//是否显示拖拽区域
+            allowedFileExtensions: ["png", "jpg", "jpeg", "ico", "gif"],//允许的图片类型
+            uploadClass:'btn btn-primary btn-sm',
+            showUpload: true, //是否显示上传按钮
+            uploadLabel:'更新',
+            removeClass:'btn btn-danger btn-sm',
+            showRemove: true, //显示移除按钮
+            browseLabel: "选择图片",
+            showCancel:false,//不显示取消按钮
+            showCaption: false,//显示所选文件的标题
+            browseClass: "btn btn-info btn-sm",
+            autoReplace:true,//再次选择文件，会将当前的文件替换掉
+//            showPreview:false,//是否显示预览区域
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",//w文件不能预览是默认显示
+            msgSizeTooLarge: '图片文件太大！',
+            msgFilesTooMany: "选择上传的文件数量为({n}) 超过允许的最大数值({m})！",
+            layoutTemplates:{
+                actionUpload:'',//去除上传预览缩略图中的上传图片
+            },
+             removeFromPreviewOnError:true, //当选择的文件不符合规则时，例如不是指定后缀文件、大小超出配置等，选择的文件不会出现在预览框中，只会显示错误信息
+//            hideThumbnailContent: true,// hide image, pdf, text or other content in the thumbnail preview 不显示预览图片
+
+        }) .on("fileuploaded", function(e, data) {//文件上传成功的回调函数
+            var res = data.response;
+            console.log(res);
+            $("#headModel").modal("hide");
+            document.getElementById("context").innerHTML="更新成功！";
+            $("#infoModal").modal("show");
+            $('#infoModal').on('hidden.bs.modal', function () {
+                // 执行一些动作...
+                location.reload();
+            })
+        });
+
+
+
+    </script>
+</body>
+</html>

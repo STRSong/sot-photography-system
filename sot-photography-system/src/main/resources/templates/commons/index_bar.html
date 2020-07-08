@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页导航栏</title>
+</head>
+<body>
+<!--导航栏-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom fixed-top" style="height: 65px;" id="topbar">
+    <a class="navbar-brand" href="#">SOT</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse row" id="navbarSupportedContent">
+        <div class="col-md-3">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link myFont" href="index.html" th:href="@{/index.html}"><img src="images/icons/building.svg" th:src="@{/images/icons/building.svg}">首页 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6" >
+            <form class="form-inline my-2 my-lg-0">
+                <!--mr-sm-2-->
+                <!--下拉框-->
+                <div class="dropdown" data-offset="10,20">
+                    <a class="btn btn-primary dropdown-toggle"  style="width: 120px;" id="dropdownMenu1" href="#" role="button" data-toggle="dropdown" data-trigger="hover"  aria-haspopup="true" aria-expanded="false">
+                        全部类别
+                    </a>
+                    <div class="dropdown-menu myFont mt-0" id="dropDownCur" aria-labelledby="dropdownMenu1">
+                        <a class="dropdown-item " href="javascript:;" onclick="shows($(this).text())">全部类别</a>
+                        <a class="dropdown-item"  href="javascript:;" onclick="shows($(this).text())">青春</a>
+                        <a class="dropdown-item"  href="javascript:;" onclick="shows($(this).text())"><img src="images/icons/people.svg" th:src="@{/images/icons/people.svg}" width="24px" height="24px">情侣</a>
+                        <a class="dropdown-item"  href="javascript:;" onclick="shows($(this).text())"><img src="images/icons/camera-video.svg" th:src="@{/images/icons/camera-video.svg}" width="24px" height="24px">短视频</a>
+                    </div>
+                </div>
+                <input class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"><img src="images/icons/search.svg" th:src="@{/images/icons/search.svg}" height="24px" width="24px"></button>
+            </form>
+        </div>
+        <div class="col-md-2  myFont navbar-nav">
+            <a class="nav-link" id="login" th:if="${session.userId==null}" style="padding-top: 5px;" href="login.html"  data-toggle="popover" data-trigger="hover" data-html="true" data-placement="bottom" title="登录后你可以：" data-content="<img src='images/popover.png' height='200' width='320'/>" >
+                <img class="rounded-circle" style="padding-top: 0px;" src="images/header.jpg" th:src="@{/images/header.jpg}" width="36px" height="36px">登录
+            </a>
+            <a class="nav-link" id="register" href="register.html" th:if="${session.userId==null}">注册</a>
+            <a href="#" class="dropdown-toggle text-decoration-none" data-toggle="dropdown"  th:if="${session.userId!=null}">
+                <img class="rounded-circle" style="padding-top: 0px;" src="images/header.jpg" th:src="@{${session.userHeaderImage}}" width="36px" height="36px"> [[${session.userName}]]
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" th:href="@{/user/userInfo_index}">个人中心</a>
+                <a class="dropdown-item" href="#">我的订单</a>
+                <a class="dropdown-item" href="#">我的购物车</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" th:href="@{/loginout}">退出登陆</a>
+            </div>
+        </div>
+        <div class="col-md-1 myFont navbar-nav">
+            <a class="btn btn-danger rounded h-75 font-weight-bold ml-3"  role="button" href="">摄影预定</a>
+        </div>
+    </div>
+</nav>
+
+
+</body>
+</html>

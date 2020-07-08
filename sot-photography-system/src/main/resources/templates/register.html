@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <!--引入样式文件-->
+    <link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.css}">
+    <link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}">
+
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+</head>
+<body style="background-image: url('images/register3.jpg');background-size: 100%">
+
+    <div class="row justify-content-center" style="padding-top: 100px;">
+        <div class="col-md-6">
+            <div class="card" style="width: 30rem;height: 45rem;margin: 0 auto;">
+                <div class="card-header" style="text-align: center;font-family: 微软雅黑;">
+                    <h2>注册</h2>
+                </div>
+                <div style="margin: 0 auto;padding-top: 20px;">
+                    <img src="images/图标.jpg" th:src="@{/images/图标.jpg}" class="rounded-circle border" height="120" width="120"/>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/userRegister}" class="was-validated" method="post" id="form1">
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-light"><img src="images/icons/person-fill.svg" th:src="@{/images/icons/person-fill.svg}" height="24px" width="24px"></div>
+                                <input  class="form-control is-invalid" id="userName"  name="userName" required="" pattern="[\u4e00-\u9fa5a-zA-Z0-9]{2,8}" placeholder="请输入不含特殊字符2-8位的用户名...">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-light"><img src="images/icons/lock-fill.svg" th:src="@{/images/icons/lock-fill.svg}" height="24px" width="24px"></div>
+                                <input type="password" class="form-control" id="userPassword" required="" name="userPassword" pattern="[a-zA-Z0-9]{4,10}" placeholder="请输入不含特殊字符4-10位的密码...">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-light"><img src="images/icons/lock-fill.svg" th:src="@{/images/icons/lock-fill.svg}" height="24px" width="24px"></div>
+                                <input type="password" class="form-control" id="userPassword2"  name="userPassword2"  required="" pattern="[a-zA-Z0-9]{4,10}" placeholder="请再次输入密码..." onchange="checkPasswords()">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-light"><img src="images/icons/envelope-fill.svg" th:src="@{/images/icons/envelope-fill.svg}" height="24px" width="24px"></div>
+                                <input type="email" class="form-control" id="userEmail" name="userEmail" required="" pattern="^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$" placeholder="请输入邮箱号码...">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-10" style="margin: 0 auto;padding: 5px;">
+                            <div class="input-group">
+                                <div class="input-group-text bg-light"><img src="images/icons/phone.svg" th:src="@{/images/icons/phone.svg}" height="24px" width="24px"></div>
+                                <input type="tel" class="form-control" id="userTel" name="userTel" required="required" placeholder="请输入11位电话号码..." pattern="1[34578]\d{9}$">
+                                <!--<input class="form-control" type="email"  required="" placeholder="username" oninvalid="this.setCustomValidity('Please Enter valid email')"></input>-->
+                                <!--<div class="invalid-feedback" width="20px;">手机号只能是11位的数字！</div>-->
+                            </div>
+                        </div>
+                        <div class="form-group col-md-8" style="margin: 0 auto;padding: 5px;">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck" required="">
+                                <label class="form-check-label" for="gridCheck">
+                                    <a class="card-link" href="#" data-toggle="modal" data-target="#registerModal">已阅读旧时光网使用条款和隐私策略</a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-8" style="margin: 0 auto;padding: 10px;">
+                            <button type="submit" class="btn btn-primary btn-block">注 册</button>
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="col-md-8" style="margin: 0 auto;padding: 10px;text-align: center;">
+                        <a class="card-link" href="#">中文</a><a class="card-link" href="#">English</a>
+                        <p>@Song 2020</p>
+                    </div>
+                </div>
+                <div class="card-footer" style="text-align: end;">
+                    已有账号，<a class="card-link" href="login.html">立即登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--模态框-->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">旧时光网使用条款和隐私策略</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <pre><h6>1. 提示条款
+
+    欢迎您与旧时光网（旧时光摄影科技有限公司）共同签署本《用户服务协议》（下称“本协议”）并使用旧时光网网站服务！各条款标题仅为帮助您理解该
+条款表达的主旨之用，不影响或限制本协议条款的含义或解释。为维护您自身权益，建议您仔细阅读各条款具体表述。您在申请注册流程中点击同意本协议
+之前，应当认真阅读本协议。请您务必审慎阅读、充分理解各条款内容，特别是免除或者限制责任的条款、法律适用和争议解决条款。免除或者限制责任的
+条款将以粗体或下划线标识，您应重点阅读。如您对协议有任何疑问，可向旧时光网客服咨询。当您按照注册页面提示填写信息、阅读并同意本协议且完成
+全部注册示您已充分阅读、理解并接受本协议的全部内容，并与旧时光网达成一致，成为旧时光网网站“用户”。阅读本协议的过程中，如果您不同意本协
+条款程序后，即表约定，您应立即停止注册程序。如果您未申请注册流程，或者在本协议生效前已成为旧时光网的注册用户，则您通过访问和/或使用旧时
+光网，议或其中任何即视为您表示同意接受本协议的全部内容，否则请您停止访问或使用旧时光网平台网站。
+旧时光网：指http://ssong。top/，主要分为摄影图、插画等原创素材及海外精选创意素材，由旧时光摄影科技有限公司所有及运营。
+
+2. 协议范围
+2.1 签约主体
+本协议由您与旧时光网（旧时光摄影科技有限公司）共同缔结，本协议对您与旧时光网均具有合同效力。
+本协议项下，旧时光网经营者可能根据旧时光网的业务调整而发生变更，变更后的旧时光网经营者与您共同履行本协议并向您提供服务，旧时光网经营者的
+变更不会影响您本协议项下的权益。
+2.2 补充协议
+由于互联网行业的高速发展和法律法规的更迭，您与旧时光网签署的本协议列明的条款并不能完整罗列并覆盖您与旧时光网所有权利与义务，现有的约定也
+不能保证完全符合未来发展的需求。因此，旧时光网公示的相关政策、声明、规则和协议均为本协议的补充协议，与本协议不可分割且具有同等法律效力。
+如您使用旧时光网服务，视为您同意上述补充协议。
+
+3. 账户注册与使用
+3.1 用户资格
+您确认，在您开始注册程序使用旧时光网服务前，您应当具备中华人民共和国法律规定的与您行为相适应的民事行为能力。若您不具备前述与您行为相适应
+的民事行为能力，请您务必在您的监护人仔细阅读协议内容并同意的前提下，完成注册。若您违反法律法规或协议内容，造成的一切后果由您及您的监护人
+承担。
+3.2 账户说明
+【账户获得】当您按照注册页面提示填写信息、阅读并同意本协议且完成全部注册程序后，您可获得旧时光网账户（即旧时光网用户ID）并成为旧时光网用
+户。旧时光网账号的所有权归旧时光网，用户完成注册申请手续后，获得旧时光网账号的使用权。
+【账户使用】您有权使用您设置或确认的旧时光网会员名、邮箱、手机号码（以下简称“账户名称”）及您设置的密码（账户名称及密码合称“账户”）登
+录旧时光网。由于您的旧时光网账户关联您的个人信息及旧时光网商业信息，您的旧时光网账户仅限您本人使用。未经旧时光网同意，您不得直接或间接授
+权第三方使用您旧时光网账户或获取您账户项下信息，否则该授权的行为无效，因此给旧时光网造成的所有损失（包括但不限于直接损失、间接损失及维权
+支付的律师费用、用、公证费用等合理费用）由您赔偿，旧时光网有权冻结您的账户，并不予退还未使用的VIP权限。如旧时光网判断您账户的使用可能危
+及您的账户安全及/或摄图保全费网信息安全的，旧时光网可拒绝提供相应服务或终止本协议。您若发现账号遭他人非法使用，应立即通知旧时光网。根据
+国家法律法规规定，您的用户名称和头像不能涉及官媒、党政、外国元首、色情、传播暴恐、封建迷信、分裂国家、恶意广告等违法信息，否则旧时光网
+有权要求您进行修改或者限制您的账号使用。
+【实名认证】作为旧时光网经营者，为使您更好地使用旧时光网的各项服务，保障您的账户安全，旧时光网可要求您按旧时光网要求及我国法律法规的规定
+完成实名认证或企业认证。如您拥有多个不同主体账号，多个主体账号均需完成认证，并且不同主体账号如需使用相并且不同主体账号如需使用相同素材，
+应当分别进行下载，未经下载或未获得甲方特别授权，该使用行为将无法获得授权。如因此造成的损失，旧时光网不予承担。
+【账号回收】如您的账户超过一年未登录，旧时光网有权予以进行注销等清理，您的账户将不能再登录旧时光网，相应服务同时终止且旧时光网无需承担
+任何法律责任。旧时光网在对此类账户进行清理前，将以包括但不限于网站公告、站内消息等方式通知您。
+【账号注销】如您需要对您的账号进行注销，您可以通过以下方式联系旧时光网，旧时光网在收到您的请求后尽快予以注销您的账号：
+（1）在线客服（周一到周五：9:00-22:00）
+（2）邮箱：1315233682@qq.com
+（3）客服电话：15581396772
+ 如您有其他与会员服务售后相关的问题，可以通过旧时光网公布的联系方式联系客服进行反馈。
+                    </h6></pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关 闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="hidden" style="display: none" data-toggle="modal" id="errorbt" data-target="#errorModal"></button>
+    <div class="modal fade" data-toggle="modal" id="errorModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>提示</h4>
+                </div>
+                <div class="modal-body">
+                    <h5 style="color: red">[[${msg}]]</h5>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--================================================================================================================-->
+    <!--引入js文件-->
+    <script src="js/jquery-3.2.1/jquery-3.2.1.min.js" th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+    <script src="bootstrap-4.4.1-dist/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+    <script>
+        function passwordCheck() {
+            var password1=document.getElementById("userPassword").value;
+            var password2=document.getElementById("userPassword2").value;
+            if(password1=='' || password2==''){
+                return false;
+            }else if(password1!=''&&password2!=''&&password1.trim()==password2.trim()){
+                return true;
+            }else if(password1!=''&&password2!=''&&password1.trim()!=password2.trim()){
+                document.getElementById("errorbt").click();
+                return false;
+            }
+        }
+
+        function checkPasswords() {
+            var passl = document.getElementById("userPassword");
+            var pass2 = document.getElementById("userPassword2");
+            if (passl.value != pass2.value)
+                pass2.setCustomValidity("两次密码必须输入一致！");
+            else
+                pass2.setCustomValidity('');
+        }
+
+        $(function () {
+            var msg="[[${msg}]]";
+            if(msg != ''){
+                document.getElementById("errorbt").click();
+                msg = null;
+            }
+        })
+
+        function check() {
+            document.getElementById('ok').disabled = 'disabled';
+        }
+    </script>
+</body>
+</html>

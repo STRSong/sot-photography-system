@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户中心导航栏</title>
+</head>
+<body>
+
+<!--用户中心侧边栏-->
+<div class="col-md-2 bg-light border-right" style="height:85vh;text-align: center;" id="userSide">
+    <div class="border-bottom" style="height: 50px;">
+        <h5 class="pt-3" style="font-family: 幼圆;">个人中心</h5>
+    </div>
+    <div>
+        <ul class="nav flex-column font-weight-normal nav-pills" id="sideUl" style="font-family: 幼圆">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/user/userInfo_index.html}"  th:class="${activeUrl=='/user/userInfo_index.html'?'nav-link active':'nav-link'}" href="#"><img src="images/icons/house.svg" th:src="@{/images/icons/house.svg}" width="22" height="22"style="vertical-align :bottom">首 页</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/user/userInfo_info.html}"  th:class="${activeUrl=='/user/userInfo_info.html'?'nav-link active':'nav-link'}" href="#"><img src="images/icons/people.svg" th:src="@{/images/icons/people.svg}" width="22" height="22"style="vertical-align :bottom">我的信息</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/user/userInfo_head.html}"  th:class="${activeUrl=='/user/userInfo_head.html'?'nav-link active':'nav-link'}" href="#"><img src="images/icons/person.svg" th:src="@{/images/icons/person.svg}" width="22" height="22"style="vertical-align :bottom">我的头像</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/user/userInfo_vip.html}"  th:class="${activeUrl=='/user/userInfo_vip.html'?'nav-link active':'nav-link'}" href="#"><img src="images/icons/award.svg" th:src="@{/images/icons/award.svg}" width="22" height="22"style="vertical-align :bottom">我的会员</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><img src="images/icons/question.svg" th:src="@{/images/icons/question.svg}" width="22" height="22"style="vertical-align :bottom">问题反馈</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

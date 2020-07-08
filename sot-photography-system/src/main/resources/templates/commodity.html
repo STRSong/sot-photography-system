@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品页</title>
+    <link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.css" th:href="@{/bootstrap-4.4.1-dist/css/bootstrap.css}">
+    <style>
+        .imagesAlt{
+            width: auto;
+            height: 700px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        .mydiv_Center{
+            margin: 0 auto;
+        }
+        .myFont{
+            font-family: 幼圆;
+            font-weight: 900;
+            font-size:18px;
+        }
+
+        #rightbar a{
+            color: black;
+            font-size: 17px;
+            font-family: 微软雅黑;
+        }
+
+        /*鼠标悬浮改变li的背景色*/
+        #rightbar a:hover {
+            background-color:#007bff;
+            display: block;
+            color: white;
+            text-decoration: none;
+        }
+
+
+    </style>
+</head>
+<body>
+    <!--导航栏-->
+    <div th:replace="~{commons/index_bar::#topbar}"></div>
+
+
+    <div class="container-fluid" style="padding-top: 65px;" id="miao">
+        <div class="row">
+            <!--//左-->
+            <div class="col-md-1">
+                <div class="w-100" style="position: fixed;top: auto; padding-top:45vh;">
+                    <a href="#" class="badge badge-info text-center ml-3 shadow"style="background-color: #FF6699"><h5>联系客服</h5></a>
+                </div>
+            </div>
+            <!--//中-->
+            <div class="col-md-10 bg-light">
+                <div class="col-md-11 justify-content-center mydiv_Center pt-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Library</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Data</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-md-11 bg-white mydiv_Center border rounded">
+
+                    <div class="pt-2 border-bottom">
+                        <h4>标题</h4>
+                    </div>
+
+                    <div class="card-columns pt-2">
+                        <div class="card">
+                            <img src="images/壁纸8.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title that wraps to a new line</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <img src="images/壁纸5.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <img src="images/test.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <img src="images/壁纸11.jpg" class="card-img-top" alt="...">
+                        </div>
+
+                        <div class="card">
+                            <img src="images/壁纸8.jpg" class="card-img-top" alt="...">
+                        </div>
+
+                        <div class="card">
+                            <img src="images/壁纸8.jpg" class="card-img-top" alt="...">
+                        </div>
+
+                        <div class="card p-3 text-right">
+                            <blockquote class="blockquote mb-0">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                <footer class="blockquote-footer">
+                                    <small class="text-muted">
+                                        Someone famous in <cite title="Source Title">Source Title</cite>
+                                    </small>
+                                </footer>
+                            </blockquote>
+                        </div>
+
+                        <div class="card">
+                            <img src="images/壁纸8.jpg" class="card-img-top" alt="...">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-11 mydiv_Center bg-white  rounded mt-2 pt-2 pb-2">
+                    <div class="card">
+                        <h5 class="card-header" id="showTop">参数信息：</h5>
+                        <div class="card-body">
+                            <h5 class="card-title border-bottom pb-2">套餐名称：简约校园风</h5>
+
+                            <!--<p class="card-text text-center">摄影师</p>-->
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="card border-info mb-3" style="max-width: 18rem;">
+                                        <div class="card-header bg-transparent border-info">摄影师：tony</div>
+                                        <div class="card-body text-info">
+                                            <h5 class="card-title">Success card title</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                        <div class="card-footer bg-transparent border-info">Footer</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="card border-success mb-3" style="max-width: 18rem;">
+                                        <div class="card-header bg-transparent border-success">Header</div>
+                                        <div class="card-body text-success">
+                                            <h5 class="card-title">Success card title</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                        <div class="card-footer bg-transparent border-success">Footer</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="card border-primary mb-3" style="max-width: 18rem;">
+                                        <div class="card-header bg-transparent border-primary">Header</div>
+                                        <div class="card-body text-primary">
+                                            <h5 class="card-title">Success card title</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                        <div class="card-footer bg-transparent border-primary">Footer</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="card border-warning mb-3" style="max-width: 18rem;">
+                                        <div class="card-header bg-transparent border-warning">Header</div>
+                                        <div class="card-body text-warning">
+                                            <h5 class="card-title">Success card title</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                        <div class="card-footer bg-transparent border-warning">Footer</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-right pt-3">
+                                <a href="#" class="btn btn-lg btn-warning  mr-4">加入购物车</a>
+                                <a href="#" class="btn btn-lg btn-danger  mr-4">拍摄同款</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-11 mydiv_Center bg-white  rounded mt-2 pt-2">
+                    <div class="card">
+                        <h5 class="card-header">评价：</h5>
+                        <div class="card-body">
+                            <div class="">
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">好评</a>
+                                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">中评</a>
+                                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">差评</a>
+                                    </div>
+                                    <div class="pt-2">
+                                        <a class="card-link" href="#">按时间</a>
+                                        <a class="card-link" href="#">按热度</a>
+                                    </div>
+                                </nav>
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active pt-3" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                        <div class="row rounded border">
+                                            <div class="col-md-2 row pt-2 pb-2 border-right">
+                                                <img src="images/header.jpg" width="50px" height="50px" class="rounded-circle border ml-3">
+                                                <h5 class="pl-3 pt-2 text-info">str少寒</h5>
+                                            </div>
+                                            <div class="col-md-8 pt-2 pb-2">
+                                                <h5 class="pl-3">挺好的，不错不错，好评好评</h5>
+                                            </div>
+                                            <div class="col-md-2 row no-gutters pt-2 pb-2 border-left">
+                                                <a id="heart" href="javascript:;" onclick="clickHeart()" class="pt-2">
+                                                    <svg id="heartSvg" class="bi bi-heart-fill" style="color: #FF6699" width="30" height="30" viewBox="-2 -2 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M10 3.314C14.438-1.248 25.534 6.735 10 17-5.534 6.736 5.562-1.248 10 3.314z" clip-rule="evenodd"/>
+                                                    </svg>
+                                                </a>
+                                                <h6 class="pt-3 pl-1" style="color: #FF6699" id="heartNumber">2000</h6>
+                                                <h6 class="pl-3 pt-3 float-right text-info">2020-4-11 9:20</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--//右-->
+            <div class="col-md-1">
+                <div class="w-100" style="position: fixed;top: auto; padding-top:20vh;">
+                    <ul id="rightbar" class="list-group text-center shadow" style="width: 130px;">
+                        <a class="list-group-item" href="#">我的购物车</a>
+                        <a class="list-group-item" href="#">我的订单</a>
+                        <a class="list-group-item" href="#">我的购物车</a>
+                        <a class="list-group-item" href="#">我的购物车</a>
+                        <a class="list-group-item" href="#">我的购物车</a>
+                    </ul>
+
+                    <div class="invisible" id="backtop">
+                        <a href="#miao" style="width: 130px;" class="badge badge-secondary mt-5 shadow"><h5>返回顶部</h5></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!--=================================================================================================================-->
+<!--引入js文件-->
+<script src="js/jquery-3.2.1/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
+<script src="bootstrap-4.4.1-dist/js/bootstrap.min.js" th:src="@{/bootstrap-4.4.1-dist/js/bootstrap.min.js}"></script>
+<script src="bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js" th:src="@{/bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js}"></script>
+<script>
+
+    //鼠标悬停显示下拉框
+    $("#dropdownMenu1").hover(
+        function(){
+            $("#dropDownCur").show();
+        },function(){
+            $("#dropDownCur").hide();
+        });
+
+    //为了鼠标可以进入下拉框
+    $("#dropDownCur").hover(function() {
+        $(this).show();//鼠标进入下拉框
+    }, function() {
+        $(this).hide();//鼠标离开下拉框后，就会消失
+    });
+
+    //下拉菜单文字切换
+    function shows(a) {
+        $('#dropdownMenu1').text(a);
+    };
+
+    $("#heart").click(function () {
+        $("#heartSvg").toggleClass("text-danger");
+    })
+
+    function clickHeart() {
+        
+    }
+
+    $(document).scroll(function() {
+        sTop = $(this).scrollTop(); //获取滚动条的位置
+        var sh = $(window).height();//视口高度
+        var ft = $("#showTop").offset().top//指定元素距离文档顶部高度
+
+        // 滚动条位置 大于 指定元素减去 视口高度时
+        if (sTop > (ft - sh)) { //当底部出现在视口时 触发
+            //dododo
+            $("#backtop").removeClass("invisible");
+        }else {
+            $("#backtop").addClass("invisible");
+        }
+
+    })
+  
+</script>
+</body>
+</html>
